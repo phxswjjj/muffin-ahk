@@ -31,15 +31,21 @@ class ScreenController {
         if (PixelGetColor(1049, 194, 'RGB') == 0x7DA2E2) {
             Click(1049, 194)
             Sleep(300)
-            ; 確認-離開隊伍
-            if (PixelGetColor(909, 614, 'RGB') == 0x6584B9) {
-                Click(909, 614)
-                Sleep(500)
 
-                ; 開始匹配
-                if (isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
-                    Click(902, 584)
-                }
+            ; 有其他視窗擋住
+            if (PixelGetColor(923, 985, 'RGB') == 0x070706) {
+                Click(923, 985)
+                Sleep(1000)
+            }
+
+            ; 確認-離開隊伍
+            Click(909, 614)
+            Sleep(1000)
+
+            ; 開始匹配
+            if (isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
+                Click(902, 584)
+                Sleep(500)
             }
             return true
         }
@@ -93,6 +99,21 @@ class ScreenController {
             return false
         }
         if (PixelGetColor(930, 278, 'RGB') != 0x903E2C) {
+            return false
+        }
+        if (PixelGetColor(939, 1008, 'RGB') == 0x030202) {
+            Click(939, 1008)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
+
+    BossChallengeSuccess() {
+        if (PixelGetColor(910, 205, 'RGB') != 0xFFC66D) {
+            return false
+        }
+        if (PixelGetColor(834, 190, 'RGB') != 0xD66347) {
             return false
         }
         if (PixelGetColor(939, 1008, 'RGB') == 0x030202) {

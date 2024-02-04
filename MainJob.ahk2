@@ -44,6 +44,11 @@ FightJob() {
         Utility.OutputLog("BossChallengeFail")
         Sleep(3000)
     }
+
+    if (screenCtrl.BossChallengeSuccess()) {
+        Utility.OutputLog("BossChallengeSuccess")
+        Sleep(3000)
+    }
 }
 
 ~RButton::
