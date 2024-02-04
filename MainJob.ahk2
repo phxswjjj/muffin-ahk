@@ -1,0 +1,67 @@
+#Include ./Utility/Common.ahk2
+#Include ./Job/ScreenJob.ahk2
+
+WinTitle := "麥芬2"
+UniqueID := WinExist(WinTitle)
+if not UniqueID {
+    Utility.OutputLog("[" WinTitle "] not found")
+    ExitApp
+}
+Utility.OutputLog("[" WinTitle "] found [" UniqueID "]")
+
+SetTimer FightJob, 200
+
+Return
+
+FightJob() {
+    If not WinActive("ahk_id " UniqueID)
+        return
+
+    screenCtrl := ScreenController(UniqueID)
+    ; if (screenCtrl.PartyLeaderStartMatch()) {
+    ;     Utility.OutputLog("PartyLeaderStartMatch")
+    ;     Sleep(2000)
+    ; }
+    if (screenCtrl.LeaveParty(true)) {
+        Utility.OutputLog("LeaveParty")
+        Sleep(2000)
+    }
+    if (screenCtrl.SelectJobPosition()) {
+        Utility.OutputLog("SelectJobPosition")
+        Sleep(2000)
+    }
+    if (screenCtrl.StartMatch()) {
+        Utility.OutputLog("StartMatch")
+        Sleep(10000)
+    }
+
+    if (screenCtrl.FightSuccess()) {
+        Utility.OutputLog("FightSuccess")
+        Sleep(5000)
+    }
+
+    if (screenCtrl.BossChallengeFail()) {
+        Utility.OutputLog("BossChallengeFail")
+        Sleep(3000)
+    }
+}
+
+~RButton::
+{
+    If not WinActive("ahk_id " UniqueID)
+        return
+    
+    MouseGetPos(&MouseX, &MouseY)
+    MouseMove(0, 0)
+    color := PixelGetColor(MouseX, MouseY, 'RGB')
+    Utility.OutputLog("click " color " " MouseX ", " MouseY)
+    
+    MouseMove(MouseX, MouseY)
+}
+
+^!z:: ; Ctrl+Alt+Z hotkey.
+{
+    Utility.OutputLog("Z pressed")
+    Utility.OutputLog("Stopped")
+    ExitApp
+}

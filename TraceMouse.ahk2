@@ -1,0 +1,37 @@
+#Include ./Utility/Common.ahk2
+
+WinTitle := "麥芬2"
+UniqueID := WinExist(WinTitle)
+if not UniqueID {
+    Utility.OutputLog("[" WinTitle "] not found")
+    ExitApp
+}
+Utility.OutputLog("[" WinTitle "] found [" UniqueID "]")
+
+Return
+
+~LButton::
+{
+    If not WinActive("ahk_id " UniqueID)
+        return
+    
+    MouseGetPos(&MouseX, &MouseY)
+    MouseMove(0, 0)
+    color := PixelGetColor(MouseX, MouseY, 'RGB')
+    Utility.OutputLog("Lclick " color " " MouseX ", " MouseY)
+    
+    MouseMove(MouseX, MouseY)
+}
+
+~RButton::
+{
+    If not WinActive("ahk_id " UniqueID)
+        return
+    
+    MouseGetPos(&MouseX, &MouseY)
+    MouseMove(0, 0)
+    color := PixelGetColor(MouseX, MouseY, 'RGB')
+    Utility.OutputLog("Rclick " color " " MouseX ", " MouseY)
+    
+    MouseMove(MouseX, MouseY)
+}

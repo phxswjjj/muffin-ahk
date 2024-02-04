@@ -1,0 +1,105 @@
+class ScreenController {
+    __New(appId) {
+        this.AppId := appId
+    }
+
+    PartyLeaderStartMatch() {
+        if (PixelGetColor(1049, 194, 'RGB') != 0x7DA2E2) {
+            return false
+        }
+        ; 自己位置(粉色)
+        if (PixelGetColor(793, 308, 'RGB') != 0xF09E9E) {
+            return false
+        }
+        if (PixelGetColor(899, 806, 'RGB') == 0x6584B9) {
+            Click(899, 806)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
+    LeaveParty(isRetry := false) {
+        ; 自己位置(粉色)
+        if (PixelGetColor(793, 308, 'RGB') != 0xF09E9E) {
+            return false
+        }
+        ; 有成員離開
+        if (PixelGetColor(1057, 619, 'RGB') != 0x88A3D1) {
+            return false
+        }
+        ; 離開隊伍
+        if (PixelGetColor(1049, 194, 'RGB') == 0x7DA2E2) {
+            Click(1049, 194)
+            Sleep(300)
+            ; 確認-離開隊伍
+            if (PixelGetColor(909, 614, 'RGB') == 0x6584B9) {
+                Click(909, 614)
+                Sleep(500)
+
+                ; 開始匹配
+                if (isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
+                    Click(902, 584)
+                }
+            }
+            return true
+        }
+        
+        return false
+    }
+
+    SelectJobPosition() {
+        if (PixelGetColor(982, 559, 'RGB') != 0xF4AA4B) {
+            return false
+        }
+        if (PixelGetColor(910, 633, 'RGB') == 0x6584B9) {
+            Click(910, 633)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
+
+    StartMatch() {
+        ; 0x6584B9 1001, 516
+        pos := [1001, 516]
+        if (PixelGetColor(pos[1], pos[2], 'RGB') == 0x6584B9) {
+            Click(pos*)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
+
+    FightSuccess() {
+        if (PixelGetColor(852, 382, 'RGB') != 0xF4D992) {
+            return false
+        }
+        if (PixelGetColor(849, 391, 'RGB') == 0xF6D081) {
+            Click(676, 629)
+            Sleep(500)
+
+            ; 確認-未領取獎勵
+            if (PixelGetColor(907, 617, 'RGB') == 0x6584B9) {
+                Click(907, 617)
+                Sleep(500)
+            }
+            return true
+        }
+        return false
+    }
+
+    BossChallengeFail() {
+        if (PixelGetColor(933, 232, 'RGB') != 0xD06045) {
+            return false
+        }
+        if (PixelGetColor(930, 278, 'RGB') != 0x903E2C) {
+            return false
+        }
+        if (PixelGetColor(939, 1008, 'RGB') == 0x030202) {
+            Click(939, 1008)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
+}
