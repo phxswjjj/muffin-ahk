@@ -23,10 +23,20 @@ class ScreenController {
         if (PixelGetColor(793, 308, 'RGB') != 0xF09E9E) {
             return false
         }
+
+        isLeaveParty := false
         ; 有成員離開
         if (PixelGetColor(1057, 619, 'RGB') != 0x88A3D1) {
+            isLeaveParty := true
+        }
+        ; 變成隊長
+        if (PixelGetColor(906, 809, 'RGB') != 0x6584B9) {
+            isLeaveParty := true
+        }
+        if(not isLeaveParty) {
             return false
         }
+
         ; 離開隊伍
         if (PixelGetColor(1049, 194, 'RGB') == 0x7DA2E2) {
             Click(1049, 194)
@@ -116,7 +126,7 @@ class ScreenController {
         if (PixelGetColor(834, 190, 'RGB') != 0xD66347) {
             return false
         }
-        if (PixelGetColor(939, 1008, 'RGB') == 0x030202) {
+        if (PixelGetColor(939, 1008, 'RGB') == 0x030303) {
             Click(939, 1008)
             Sleep(500)
             return true
