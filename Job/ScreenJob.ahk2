@@ -1,6 +1,7 @@
 class ScreenController {
     __New(appId) {
         this.AppId := appId
+        this.HasReward := true
     }
 
     PartyLeaderStartMatch() {
@@ -33,6 +34,10 @@ class ScreenController {
         if (PixelGetColor(906, 809, 'RGB') != 0x6584B9) {
             isLeaveParty := true
         }
+        ; 沒獎勵
+        if (not this.HasReward) {
+            isLeaveParty := true
+        }
         if(not isLeaveParty) {
             return false
         }
@@ -53,7 +58,7 @@ class ScreenController {
             Sleep(1000)
 
             ; 開始匹配
-            if (isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
+            if (this.HasReward and isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
                 Click(902, 584)
                 Sleep(500)
             }
@@ -144,6 +149,32 @@ class ScreenController {
         if (PixelGetColor(879, 617, 'RGB') == 0xB99A6F) {
             Click(879, 617)
             Sleep(500)
+            return true
+        }
+        return false
+    }
+
+    FightSuccessButNoReward() {
+        if (PixelGetColor(858, 266, 'RGB') != 0xD66347) {
+            return false
+        }
+        if (PixelGetColor(978, 227, 'RGB') != 0xD66347) {
+            return false
+        }
+        if (PixelGetColor(822, 524, 'RGB') != 0x364155) {
+            return false
+        }
+        if (PixelGetColor(1048, 521, 'RGB') == 0x7DA2E2) {
+            this.HasReward := false
+
+            Click(676, 629)
+            Sleep(500)
+
+            ; 確認-未領取獎勵
+            if (PixelGetColor(907, 617, 'RGB') == 0x6584B9) {
+                Click(907, 617)
+                Sleep(500)
+            }
             return true
         }
         return false

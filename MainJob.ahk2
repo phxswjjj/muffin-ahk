@@ -9,15 +9,17 @@ if not UniqueID {
 }
 Utility.OutputLog("[" WinTitle "] found [" UniqueID "]")
 
+screenCtrl := ScreenController(UniqueID)
+
 SetTimer FightJob, 200
 
 Return
 
 FightJob() {
+    global screenCtrl
     If not WinActive("ahk_id " UniqueID)
         return
 
-    screenCtrl := ScreenController(UniqueID)
     ; if (screenCtrl.PartyLeaderStartMatch()) {
     ;     Utility.OutputLog("PartyLeaderStartMatch")
     ;     Sleep(2000)
@@ -53,6 +55,11 @@ FightJob() {
     if (screenCtrl.BossChallengeSuccess()) {
         Utility.OutputLog("BossChallengeSuccess")
         Sleep(3000)
+    }
+
+    if (screenCtrl.FightSuccessButNoReward()) {
+        Utility.OutputLog("FightSuccessButNoReward")
+        Sleep(1000)
     }
 }
 
