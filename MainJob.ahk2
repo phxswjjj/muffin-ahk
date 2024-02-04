@@ -35,6 +35,11 @@ FightJob() {
         Sleep(10000)
     }
 
+    if (screenCtrl.NoMatch()) {
+        Utility.OutputLog("NoMatch")
+        Sleep(3000)
+    }
+
     if (screenCtrl.FightSuccess()) {
         Utility.OutputLog("FightSuccess")
         Sleep(5000)

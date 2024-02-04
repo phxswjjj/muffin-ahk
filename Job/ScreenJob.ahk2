@@ -133,4 +133,19 @@ class ScreenController {
         }
         return false
     }
+
+    NoMatch() {
+        if (PixelGetColor(855, 455, 'RGB') != 0xF4E0AC) {
+            return false
+        }
+        if (PixelGetColor(999, 620, 'RGB') != 0x6584B9) {
+            return false
+        }
+        if (PixelGetColor(879, 617, 'RGB') == 0xB99A6F) {
+            Click(879, 617)
+            Sleep(500)
+            return true
+        }
+        return false
+    }
 }
