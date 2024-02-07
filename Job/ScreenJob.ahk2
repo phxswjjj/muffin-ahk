@@ -27,15 +27,18 @@ class ScreenController {
 
         isLeaveParty := false
         ; 有成員離開
-        if (PixelGetColor(1057, 619, 'RGB') != 0x88A3D1) {
+        if (PixelGetColor(1057, 619, 'RGB') == 0x88A3D1) {
+            Utility.OutputLog("有成員離開")
             isLeaveParty := true
         }
         ; 變成隊長
-        if (PixelGetColor(906, 809, 'RGB') != 0x6584B9) {
+        if (PixelGetColor(906, 809, 'RGB') == 0x6584B9) {
+            Utility.OutputLog("變成隊長")
             isLeaveParty := true
         }
         ; 沒獎勵
         if (not this.HasReward) {
+            Utility.OutputLog("沒獎勵")
             isLeaveParty := true
         }
         if(not isLeaveParty) {
@@ -55,12 +58,26 @@ class ScreenController {
 
             ; 確認-離開隊伍
             Click(909, 614)
-            Sleep(1000)
+            Sleep(3000)
 
             ; 開始匹配
-            if (this.HasReward and isRetry and PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
-                Click(902, 584)
-                Sleep(500)
+            if (this.HasReward and isRetry) {
+                ; 開始秘境配對
+                if (PixelGetColor(902, 584, 'RGB') == 0x6584B9) {
+                    Click(902, 584)
+                    Sleep(500)
+                }
+
+                ; 開始絕境配對
+                if (PixelGetColor(1106, 447, 'RGB') == 0xC5D84E) {
+                    Click(1106, 447)
+                    Sleep(1000)
+
+                    if (PixelGetColor(934, 864, 'RGB') == 0xF07A89) {
+                        Click(934, 864)
+                        Sleep(500)
+                    }
+                }
             }
             return true
         }
@@ -91,6 +108,7 @@ class ScreenController {
         return false
     }
 
+    ; 秘境
     FightSuccess() {
         if (PixelGetColor(852, 382, 'RGB') != 0xF4D992) {
             return false
@@ -104,6 +122,37 @@ class ScreenController {
                 Click(907, 617)
                 Sleep(500)
             }
+            return true
+        }
+        return false
+    }
+    ; 絕境
+    FightSuccess2() {
+        if (PixelGetColor(921, 341, 'RGB') != 0xFFC66D) {
+            return false
+        }
+
+        if (PixelGetColor(782, 623, 'RGB') == 0xFCFAF5) {
+            Click(920, 1017)
+            Sleep(500)
+
+            return true
+        }
+        return false
+    }
+
+    FightFail() {
+        if (PixelGetColor(1019, 855, 'RGB') == 0xB99A6F) {
+            ; 放棄
+            Click(1019, 855)
+            Sleep(1000)
+
+            ; 確定
+            if (PixelGetColor(915, 610, 'RGB') == 0x6584B9) {
+                Click(915, 610)
+                Sleep(500)
+            }
+
             return true
         }
         return false
@@ -143,10 +192,7 @@ class ScreenController {
         if (PixelGetColor(855, 455, 'RGB') != 0xF4E0AC) {
             return false
         }
-        if (PixelGetColor(999, 620, 'RGB') != 0x6584B9) {
-            return false
-        }
-        if (PixelGetColor(879, 617, 'RGB') == 0xB99A6F) {
+        if (PixelGetColor(999, 620, 'RGB') == 0x6584B9) {
             Click(879, 617)
             Sleep(500)
             return true
@@ -175,6 +221,17 @@ class ScreenController {
                 Click(907, 617)
                 Sleep(500)
             }
+            return true
+        }
+        return false
+    }
+
+    LevelUp() {
+        if (PixelGetColor(960, 225, 'RGB') != 0xFDC76E) {
+            return false
+        }
+        if (PixelGetColor(856, 637, 'RGB') == 0x363D4B) {
+            Click(949, 1016)
             return true
         }
         return false

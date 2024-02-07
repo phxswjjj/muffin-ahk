@@ -45,6 +45,14 @@ FightJob() {
     if (screenCtrl.FightSuccess()) {
         Utility.OutputLog("FightSuccess")
         Sleep(5000)
+    } else if(screenCtrl.FightSuccess2()) {
+        Utility.OutputLog("FightSuccess2")
+        Sleep(5000)
+    }
+
+    if(screenCtrl.FightFail()) {
+        Utility.OutputLog("FightFail")
+        Sleep(3000)
     }
 
     if (screenCtrl.BossChallengeFail()) {
@@ -60,6 +68,11 @@ FightJob() {
     if (screenCtrl.FightSuccessButNoReward()) {
         Utility.OutputLog("FightSuccessButNoReward")
         Sleep(1000)
+    }
+
+    if (screenCtrl.LevelUp()) {
+        Utility.OutputLog("LevelUp")
+        Sleep(200)
     }
 }
 
