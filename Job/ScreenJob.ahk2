@@ -236,4 +236,25 @@ class ScreenController {
         }
         return false
     }
+
+    StartBossChallenge() {
+        if (PixelGetColor(1147, 561, 'RGB') != 0xFCF8EE) {
+            return false
+        }
+        if (PixelGetColor(1200, 632, 'RGB') == 0xEDAA3D) {
+            Click(1200, 632)
+            return true
+        }
+        return false
+    }
+    BossChallengeSuccessAndNext() {
+        if (PixelGetColor(916, 206, 'RGB') != 0xFFC66D) {
+            return false
+        }
+        if (PixelGetColor(988, 880, 'RGB') == 0xF3A84B) {
+            Click(988, 880)
+            return true
+        }
+        return false
+    }
 }

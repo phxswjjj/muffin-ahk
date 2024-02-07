@@ -74,6 +74,15 @@ FightJob() {
         Utility.OutputLog("LevelUp")
         Sleep(200)
     }
+
+    if (screenCtrl.StartBossChallenge()) {
+        Utility.OutputLog("StartBossChallenge")
+        Sleep(10000)
+    }
+    if (screenCtrl.BossChallengeSuccessAndNext()) {
+        Utility.OutputLog("BossChallengeSuccessAndNext")
+        Sleep(30000)
+    }
 }
 
 ~RButton::
