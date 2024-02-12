@@ -25,7 +25,8 @@ class ScreenController {
             return false
         }
 
-        isLeaveParty := false
+        ; 可預設直接離開隊伍重新配對
+        isLeaveParty := true
         ; 有成員離開
         if (PixelGetColor(1057, 619, 'RGB') == 0x88A3D1) {
             Utility.OutputLog("有成員離開")
