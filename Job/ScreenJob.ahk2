@@ -67,12 +67,14 @@ class ScreenController {
                     Click(902, 584)
                     Sleep(500)
                 }
-
+                
                 ; 開始絕境配對
-                if (PixelGetColor(1106, 447, 'RGB') == 0xC5D84E) {
-                    Click(1106, 447)
+                ; 選擇遠古遺跡深入戰
+                if (PixelGetColor(798, 478, 'RGB') == 0xC0D54C) {
+                    Click(798, 478)
                     Sleep(1000)
 
+                    ; 開始配對
                     if (PixelGetColor(934, 864, 'RGB') == 0xF07A89) {
                         Click(934, 864)
                         Sleep(500)
