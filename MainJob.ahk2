@@ -1,7 +1,7 @@
 #Include ./Utility/Common.ahk2
 #Include ./Job/ScreenJob.ahk2
 
-WinTitle := "麥芬2"
+WinTitle := "麥芬"
 UniqueID := WinExist(WinTitle)
 if not UniqueID {
     Utility.OutputLog("[" WinTitle "] not found")
