@@ -49,7 +49,7 @@ class ScreenController {
         ; 離開隊伍
         if (PixelGetColor(1049, 194, 'RGB') == 0x7DA2E2) {
             Click(1049, 194)
-            Sleep(300)
+            Sleep(600)
 
             ; 有其他視窗擋住
             if (PixelGetColor(923, 985, 'RGB') == 0x070706) {
